@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+
+<head>
+    <title>UYE OL</title>
+</head>
+
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer">
+
+        <div class="kayitForm">
+            <div class="kayitBaslik">
+                <h2><b>KAYIT OL</b></h2>
+            </div>
+
+            <form method="post" asp-controller="User" asp-action="KayitOlRes" class="was-validated">
+                <div class="form-group">
+                    <input class="form-control" placeholder="AD SOYAD" pattern="[A-Za-zğüışöçZĞÜİŞÖÇ ]*" required="" name="Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="MAİL ADRESİ" required="" name="Email">
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" placeholder="11 HANELİ CEP TELEFONU" pattern="[0-9]{11}" required="" name="PhoneNumber">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="sifre" class="form-control" placeholder="ŞİFRE" required="" name="Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="sifreT" class="form-control" placeholder="ŞİFRE TEKRARI" onkeyup="kontrol(this)" required="">
+                </div>
+
+                <p id="message"></p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button id="SubmitButton" type="submit" class="btn w-100">KAYIT OL</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="ClearButton" type="reset" class="btn w-100">TEMİZLE</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+
+        var psw = document.getElementById("sifre");
+
+        function kontrol(kont) {
+            if (kont.value.length > 0) {
+                if (kont.value != psw.value) {
+                    document.getElementById("message").innerHTML = "GİRİLEN ŞİFRE İLE ŞİFRE TEKRARI EŞLEŞMEDİ";
+                    document.getElementById("SubmitButton").disabled = true;
+                }
+                if (kont.value == psw.value) {
+                    document.getElementById("message").innerHTML = "";
+                    document.getElementById("SubmitButton").disabled = false;
+                }
+            }
+            else {
+                document.getElementById("message").innerHTML = "";
+                document.getElementById("SubmitButton").disabled = false;
+            }
+        }
+
+    </script>
+
+</body>
+</html>

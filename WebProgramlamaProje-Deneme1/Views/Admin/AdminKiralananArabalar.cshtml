@@ -1,0 +1,135 @@
+﻿@model List<AdminDealModel>
+@{ 
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int carryNum = 0;
+}
+<html>
+
+<head>
+    <title>ADMİN KİRALANAN ARAÇ BİLGİLERİ</title>
+</head>
+
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer w-100">
+
+        <div class="row AdminKullaniciBaslik">
+            <div class="col-md-12">
+                KİRALANAN ARAÇ BİLGİLERİ
+            </div>
+        </div>
+        <br>
+
+
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-12 border AdmKiralananAracMarka">
+                    @item.Car.Brand
+                </div>
+            </div>
+
+            <div class="row KayitOlanKullanici">
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            AD SOYAD:
+                        </div>
+                        <div class="col-md-6">
+                            @item.User.Name
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            MAİL:
+                        </div>
+                        <div class="col-md-6">
+                            @item.User.Email
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            TEL:
+                        </div>
+                        <div class="col-md-6">
+                            @item.User.PhoneNumber
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row KayitOlanKullanici">
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            ALIŞ TARİHİ:
+                        </div>
+                        <div class="col-md-6">
+                            @item.Deal.RentDate.Date.Date.ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            Teslim TARİHİ:
+                        </div>
+                        <div class="col-md-6">
+                            @item.Deal.DeliveryDate.Date.ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            TOPLAM ÜCRET:
+                        </div>
+                        @if (item.Deal.DeliveryDate == item.Deal.RentDate)
+                        {
+                            <div class="col-md-6">
+                                @item.Car.DailyPrice
+                            </div> 
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                @{ carryNum = (int)item.Car.DailyPrice * Convert.ToInt32((item.Deal.DeliveryDate.Date - item.Deal.RentDate.Date).Days); }
+                                @carryNum
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 KiralikAracSil">
+                    <a asp-controller="Admin" asp-action="DeleteDeal" asp-route-id="@item.Deal.Id" class="btn w-100 h-100">
+                        Kiralanan Aracı Sil
+                    </a>
+                </div>
+            </div>
+
+            <br />
+         }
+
+        
+
+
+
+
+
+    </div>
+
+</body>
+</html>

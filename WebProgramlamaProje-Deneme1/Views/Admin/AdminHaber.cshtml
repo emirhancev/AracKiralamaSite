@@ -1,0 +1,89 @@
+﻿@model List<Entities.Concrete.News>
+
+@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
+
+<html>
+
+<head>
+    <title>ADMİN HABER</title>
+</head>
+
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer w-100">
+
+        <div class="haberEkleBaslik"><b>HABER EKLE-SİL</b></div><br><br />
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    <figure>
+                        <img src="/img/@item.PhotoName" class="d-block w-100 h-100">
+                    </figure>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12" style="font-size: 20px"><b>@item.Title</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9" style="font-size: 18px"><p><b>@item.Summary</b></p></div>
+                        <div class="col-md-3">
+                            <a asp-controller="Admin" asp-action="HaberSil" asp-route-id="@item.Id" id="yonlendirButton" class="btn w-100 h-100 p-4">HABERİ SİL</a>
+                        </div>
+                    </div>
+
+                </div>            
+             }
+
+        </div>
+
+        <br><br>
+
+        <form method="post" asp-controller="Admin" asp-action="HaberEkle" class="was-validated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form-control" placeholder="HABER RESİM ADINI GİRİNİZ" required="" name="photoName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form-control" placeholder="HABER BAŞLIĞINI GİRİNİZ" required="" name="title">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form-control" placeholder="HABER ÖZETİ GİRİNİZ (EN FAZLA 250 KARAKTER KABUL EDİLMEKTEDİR)" maxlength="250" required="" name="summary">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea id="HaberMesaj" cols="15" rows="7" class="form-control" placeholder="HABER İÇERİĞİNİ GİRİNİZ" required="" name="contents"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 haberEkleButton">
+                            <button type="submit" class="btn w-100 h-100 float-start">HABERİ EKLE</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+
+        <br><br>
+
+    </div>
+
+</body>
+</html>

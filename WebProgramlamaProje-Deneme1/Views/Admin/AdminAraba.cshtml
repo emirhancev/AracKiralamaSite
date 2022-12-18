@@ -1,0 +1,121 @@
+﻿@model CarListModel
+@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
+<html>
+
+<head>
+    <title>ADMİN ARABA</title>
+</head>
+
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer w-100">
+
+        <div class="aracEkleBaslik"><h3><b>ARAÇ EKLE-SİL</b></h3></div><br>
+
+        @foreach (var item in Model.Cars)
+        {
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="w-100 h-100"><img src="/img/@item.PhotoName" class="w-100 h-100" /></div>
+                </div>
+                <div class="col-md-6 aracBilgi">
+                    <div>
+                        <div class="float-start w-25"><b>Yakıt :</b></div>
+                        <div class="float-start w-75">@item.FuelType<i class="fas fa-gas-pump"></i></div>
+                    </div>
+
+                    <div>
+                        <div class="float-start w-25"><b>Vites :</b></div>
+                        <div class="float-start w-75">@item.TypeOfGear<i class="fas fa-arrows-alt"></i></div>
+                    </div>
+
+                    <div>
+                        <div class="float-start w-25"><b>G.Ücret :</b></div>
+                        <div class="float-start w-75">@item.DailyPrice<i class="fas fa-money-check-alt"></i></div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 ADmarkaBaslik">
+                    @item.Brand
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 kirala">
+
+                    <a asp-controller="Admin" asp-action="ArabaSil" asp-route-id="@item.Id" class="btn btn-warning w-100 h-100">
+                        Aracı Sil
+                    </a>
+                </div>
+            </div>
+
+            <br /><br /><br />
+        }
+
+
+
+        <form method="post" asp-controller="Admin" asp-action="ArabaEkle" class="was-validated">
+            <div class="row">
+                <div class="col-md-9 AdminAracBoyut">
+                    <div>
+                        <input class="form-control" placeholder="ARACIN RESİM ADINI GİRİNİZ" required="" name="photoName">
+                    </div>
+
+                    <div>
+                        <input class="form-control" placeholder="ARACIN MARKASINI GİRİNİZ" required="" name="brand">
+                    </div>
+
+                    <div class="float-start w-100">
+                        <select class="form-select" id="yakitLA" required="" name="fuelType">
+                            <option value="">ARACIN YAKIT TİPİNİ SEÇİNİZ</option>
+                            <option value="Benzin">Benzin</option>
+                            <option value="LPG">Lpg</option>
+                            <option value="Dizel">Dizel</option>
+                            <option value="Elektrik">Elektrik</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                    </div>
+
+                    <div class="float-start w-100">
+                        <select class="form-select" id="vitesLA" required="" name="typeOfGear">
+                            <option value="">ARACIN VİTES TİPİNİ SEÇİNİZ</option>
+                            <option value="Manuel">Manuel</option>
+                            <option value="Otomatik">Otomatik</option>
+                            <option value="YarıOtomatik">Yarı Otomatik</option>
+                            <option value="Triptonik">Triptonik</option>
+                        </select>
+                    </div>
+
+                    <div class="float-start w-100">
+                        <input class="form-control" placeholder="GÜNLÜK ÜCRET GİRİNİZ" required="" name="dailyPrice">
+                    </div>
+
+                    <div class="float-start w-100">
+                        <select class="form-select" id="yerLA" required="" name="branchId">
+                            <option value="">ARACIN BULUNDUĞU YERİ SEÇİNİZ</option>
+                            @foreach (var item in Model.Branches)
+                            {
+                                 <option value="@item.Id">@item.Adress</option>                             
+                            }
+                        </select>
+                    </div>
+                    <div class="float-start w-100">
+                        <textarea id="desc" cols="15" rows="7" class="form-control" placeholder="Description" required="" name="description"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-3 aracEkle">
+                    <button type="submit" class="btn w-100 h-100 float-start">Aracı Ekle</button>
+                </div>
+            </div>
+        </form>
+
+        <br><br>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+﻿@model CarListModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+
+<head>
+    <title>ARAÇ LİSTESİ</title>
+</head>
+
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+    <div class="container BodyContainer">
+
+        <div class="row">
+
+            <div class="col-md-3 AracFiltrele">
+
+                <div>
+                    <div class="filtreleBaslik"><h3><b>FİLTRELE</b></h3></div>
+                    <div class="FiltreleKutu">
+
+                        <form method="post" asp-controller="User" asp-action="CarListWF">
+
+                            <div class="form-group">
+                                <label for="marka"><b>Marka/Model</b></label>
+                                <input id="marka" class="form-control" placeholder="Marka/Model Giriniz" name="brand">
+                            </div>
+
+                            <label for="yakitL"><b>Yakıt</b></label>
+                            <select class="form-select" id="yakitL" name="fuelType">
+                                <option selected disabled>Yakıt Seçiniz</option>
+                                <option value="Benzin">Benzin</option>
+                                <option value="LPG">Lpg</option>
+                                <option value="Dizel">Dizel</option>
+                                <option value="Elektrik">Elektrik</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+
+
+                            <label for="vitesL"><b>Vites</b></label>
+                            <select class="form-select" id="vitesL" name="typeOfGear">
+                                <option selected disabled>Vites Tipi Seçiniz</option>
+                                <option value="Manuel">Manuel</option>
+                                <option value="Otomatik">Otomatik</option>
+                                <option value="YarıOtomatik">Yarı Otomatik</option>
+                                <option value="Triptonik">Triptonik</option>
+                            </select>
+
+                            <div class="form-group">
+                                <label for="ucretL"><b>Günlük Ücret</b></label>
+                                <input id="ucret" class="form-control" placeholder="Günlük Ücret Giriniz" name="dailyPrice">
+                            </div>
+
+                            <label for="yerL"><b>Alınacak yer</b></label>
+                            <select class="form-select" id="yerL" name="branchId">
+                                <option selected disabled>Alınacak Yer Seçiniz</option>
+                                @foreach (var item in Model.Branches)
+                                {
+                                    <option value="@item.Id">@item.Adress</option>
+                                }
+                            </select>
+
+                            <div class="form-group">
+                                <label for="date"><b>Alış Tarihi</b></label>
+                                <input type="date" id="USalis" class="form-control" name="rentDate">
+                                <script>
+                                    document.getElementById('USalis').valueAsDate = new Date();
+                                </script>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date"><b>Teslim Tarihi</b></label>
+                                <input type="date" id="USteslim" class="form-control" name="deliverDate">
+                                <script>
+                                    document.getElementById('USteslim').valueAsDate = new Date();
+                                </script>
+                            </div>
+
+                            <button type="submit" class="btn w-100">Filtrele</button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col-md-9 AracListele">
+                <div class="araclarBaslik"><h3><b>ARAÇ FİLOSU</b></h3></div>
+
+                <br><br>
+                @foreach (var item in Model.Cars)
+                {
+                    <div class="row border">
+
+                        <div class="col-md-3">
+                            <div class="w-100 h-100"><img src="/img/@item.PhotoName" class="w-100 h-100" /></div>
+                        </div>
+                        <div class="col-md-6 aracBilgi">
+                            <div><h4><b>@item.Brand</b></h4></div>
+
+                            <div>
+                                <div class="float-start w-25"><b>Yakıt :</b></div>
+                                <div class="float-start w-75">@item.FuelType<i class="fas fa-gas-pump"></i></div>
+                            </div>
+
+                            <div>
+                                <div class="float-start w-25"><b>Vites :</b></div>
+                                <div class="float-start w-75">@item.TypeOfGear<i class="fas fa-arrows-alt"></i></div>
+                            </div>
+
+                            <div>
+                                <div class="float-start w-25"><b>G.Ücret :</b></div>
+                                <div class="float-start w-75">@item.DailyPrice<i class="fas fa-money-check-alt"></i></div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3 kirala">
+                            <button disabled class="btn w-100 h-100">Kiralayabilmek için üye olmalısınız</button>
+                        </div>
+
+                    </div>
+
+                    <br /><br />
+                 }
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

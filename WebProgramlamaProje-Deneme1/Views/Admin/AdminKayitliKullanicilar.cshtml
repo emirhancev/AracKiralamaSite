@@ -1,0 +1,70 @@
+﻿@model List<Entities.Concrete.User>
+@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
+<html>
+
+<head>
+    <title>ADMİN KULLANICILAR</title>
+</head>
+
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer w-100">
+
+        <div class="row AdminKullaniciBaslik">
+            <div class="col-md-12">
+                KAYITLI KULLANICILAR
+            </div>
+        </div>
+        <br>
+
+        @foreach (var item in Model)
+        {
+
+            <div class="row KayitOlanKullanici">
+
+                <div class="col-md-4 border ">
+
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            AD SOYAD :
+                        </div>
+                        <div class="col-md-6">
+                            @item.Name
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            MAİL ADRESİ :
+                        </div>
+                        <div class="col-md-6">
+
+                            @item.Email
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 border">
+                    <div class="row AdminKayitListe">
+                        <div class="col-md-6">
+                            CEP TELEFONU :
+                        </div>
+                        <div class="col-md-6">
+                            @item.PhoneNumber
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br />
+         }
+
+    </div>
+
+</body>
+</html>

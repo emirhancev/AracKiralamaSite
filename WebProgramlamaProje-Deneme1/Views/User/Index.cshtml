@@ -1,0 +1,177 @@
+﻿@model indexData
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+
+<head>
+    <title>ANASAYFA</title>
+</head>
+
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer">
+
+        <form method="post" asp-controller="User" asp-action="CarListWF">
+            <div class="row">
+                <div class="col-lg-4 border Delivery">
+                    <select name="branchId">
+                        <option selected disabled>Alış Noktası Seçiniz</option>
+                        @foreach (var item in Model.Branches)
+                        {
+                            <option value=@item.Id>@item.Adress</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-lg-4 border StartDate">
+                    <label style="color: white" for="alis"><i class="fas fa-car"></i>Alış</label>
+                    <input type="date" id="alis" name="rentDate" />
+                    <script>
+                        document.getElementById('alis').valueAsDate = new Date();
+                    </script>
+
+                </div>
+
+                <div class="col-lg-4 border EndDate">
+                    <label style="color: white" for="teslim"><i class="fas fa-car"></i>Teslim</label>
+                    <input type="date" id="teslim" name="deliverDate" />
+                    <script>
+                        document.getElementById('teslim').valueAsDate = new Date();
+                    </script>
+                </div>
+
+            </div>
+
+            <div class="ArabaBul">
+                <button class="btn w-25">Araçları Göster<i class="fas fa-search"></i></button>
+            </div>
+        </form>
+
+        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active bg-warning" aria-current="true" aria-label="Slide 1"></button>
+                <button class="bg-warning" type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button class="bg-warning" type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button class="bg-warning" type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button class="bg-warning" type="button" data-bs-target="#carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                <button class="bg-warning" type="button" data-bs-target="#carousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                <button class="bg-warning" type="button" data-bs-target="#carousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+            </div>
+
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <figure>
+                        <img src="/img/SkodaSuperb.png" class="d-block w-100" alt="...">
+                    </figure>
+                </div>
+
+                <div class="carousel-item">
+                    <figure>
+                        <img src="/img/VolkswagenJetta.png" class="d-block w-100" alt="...">
+                    </figure>
+                </div>
+
+                <div class="carousel-item">
+                    <figure>
+                        <img src="/img/Peugeot308.png" class="d-block w-100" alt="...">
+                    </figure>
+
+                </div>
+
+                <div class="carousel-item">
+                    <figure>
+                        <img src="/img/Peugeot3008.png" class="d-block w-100" alt="...">
+                    </figure>
+                </div>
+
+                <div class="carousel-item">
+                    <figure>
+                        <img src="/img/OpelInsignia.png" class="d-block w-100" alt="...">
+                    </figure>
+
+                </div>
+
+                <div class="carousel-item">
+                    <figure>
+                        <img src="/img/ToyotaCorolla.png" class="d-block w-100" alt="...">
+                    </figure>
+
+                </div>
+
+                <div class="carousel-item">
+                    <figure>
+                        <img src="/img/FordCourier.png" class="d-block w-100" alt="...">
+                    </figure>
+                </div>
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+
+
+        <div class="HizmetClass">
+            <div><i class="fas fa-check-circle"></i>Ücretsiz İptal ve Değişim</div>
+            <div><i class="fas fa-check-circle"></i>En İyi Fiyat Garantisi</div>
+            <div><i class="fas fa-check-circle"></i>Ön Ödemesiz Rezervasyon</div>
+            <div><i class="fas fa-check-circle"></i>7/24 Destek ve Yol Yardımı</div>
+        </div>
+
+        <br> <br />
+        <br> <br />
+
+        <div class="tanitimClass">
+            <h2><b>En Kolay, En Hızlı Ve En Ucuz Araç Kiralama</b></h2>
+            <p>
+                1 dakikada rezervasyon, 5 dakikada araç teslimatı, % 100 müşteri memnuniyeti ve en iyi fiyat garantisi veriyoruz.Üstelik aracı teslim aldığınız ana kadar herhangi bir ödeme yapmanıza gerek yok.
+            </p>
+        </div>
+
+        <div class="haberlerBaslik"><i class="far fa-newspaper"></i><b>Haberler & Duyurular</b><i class="far fa-newspaper"></i></div>
+        <br><br>
+
+         @foreach (var item in Model.News)
+         {
+            <div class="row">
+                <div class="col-md-3">
+                    <figure>
+                        <img src="/img/@item.PhotoName" class="d-block w-100 h-100">
+                    </figure>
+                </div>
+                <div class="col-md-9">
+                    <div class="row newsTitle">
+                        <div class="col-md-12"><b>@item.Title</b></div>
+                    </div>
+                    <div class="row newsSummary">
+                        <div class="col-md-9"><p><b>@item.Summary</b></p></div>
+                        <div class="col-md-3">
+                            <a asp-controller="User" asp-action="Haber" asp-route-id="@item.Id" id="yonlendirButton" class="btn w-100 h-100">Devamını Oku...</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                
+            </div>           
+         }
+    </div>
+
+</body>
+</html>

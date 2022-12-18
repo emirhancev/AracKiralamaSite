@@ -1,0 +1,106 @@
+﻿@model List<CustomerDealModel>
+@using Microsoft.AspNetCore.Http;
+
+@{ 
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    int carryNum = 0;
+}
+
+<html>
+
+<head>
+    <title>KİRALAMA GEÇMİŞİ</title>
+</head>
+
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer w-100">
+
+        <div class="row KayitKullaniciKiralamaBaslik">
+            <div class="col-md-12">
+                KİRALAMA GEÇMİŞİM
+            </div>
+        </div>
+        <br>
+
+        
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-3 border KiralananKayitListe">
+                    <div class="row">
+                        <div class="col-md-6">
+                            ARAÇ MARKASI :
+                        </div>
+                        <div class="col-md-6">
+                            @item.Car.Brand
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 border KiralananKayitListe">
+                    <div class="row">
+                        <div class="col-md-6">
+                            ALIŞ TARİHİ :
+                        </div>
+                        <div class="col-md-6">
+                            @item.Deal.RentDate.Date.ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 border KiralananKayitListe">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Teslim TARİHİ :
+                        </div>
+                        <div class="col-md-6">
+                            @item.Deal.DeliveryDate.Date.ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 border KiralananKayitListe">
+                    <div class="row">
+                        <div class="col-md-6">
+                            TOPLAM FİYAT :
+                        </div>
+                        @if (item.Deal.DeliveryDate == item.Deal.RentDate)
+                        {
+                            <div class="col-md-6">
+                                @item.Car.DailyPrice
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                @{
+                                    carryNum = (int)item.Car.DailyPrice * Convert.ToInt32( (item.Deal.DeliveryDate.Date - item.Deal.RentDate.Date).Days);
+                                 }
+                                @carryNum
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+            <br />
+        }
+
+
+      
+
+
+    </div>
+    <br />
+    <br />
+    <br />
+</body>
+</html>

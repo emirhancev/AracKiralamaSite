@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<html>
+
+<head>
+    <title>İLETİŞİM</title>
+</head>
+
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+
+    <div class="container BodyContainer">
+
+        <div class="row">
+            <div class="col-md-12 iletisimForm">
+                <h2><b>İLETİŞİM FORMU</b></h2>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12 iletisimDiv">
+
+                <div class="iletisim">
+                    <form method="post" asp-controller="Customer" asp-action="ContUpdate" class="was-validated">
+                        <div class="form-group">
+                            <textarea id="mesaj" cols="15" rows="7" class="form-control" placeholder="MESAJ" required="" name="content"></textarea>
+                        </div>
+                        <br>
+
+                        <button type="submit" class="btn w-100">GÖNDER</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@model Entities.Concrete.News
+@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+}
+
+<html>
+
+<head>
+    <title>HABERLER</title>
+</head>
+
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container BodyContainer w-100">
+
+
+        <div class="row">
+            <div class="col-md-12 haberbaslik">@Model.Title</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 haberIcerik">@Model.Contents</div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById("LoginPencere").addEventListener("click", function () {
+            document.querySelector(".popup").style.display = "flex";
+        });
+
+        document.getElementById("close").addEventListener("click", function () {
+            document.querySelector(".popup").style.display = "none";
+        });
+
+    </script>
+
+    <script>
+        $(window).on("load", function () {
+            $(".loader-container").fadeOut(900);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+﻿@model RentCarModel
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<html>
+
+<head>
+    <title>ARAÇ KİRALA</title>
+</head>
+
+<body>
+    <div class="container BodyContainer">
+
+        <div class="row">
+
+            <div class="col-md-4 ">
+                <img src="/img/@Model.Car.PhotoName" class="w-100 h-100" />
+            </div>
+            <div class="col-md-4 aracBilgiler">
+
+                <div class="row">
+                    <div class="col-md-12 surucuBilgi">
+                        <h2><b>ARAÇ BİLGİLERİ</b></h2>
+                    </div>
+                </div>
+                
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="aracBaslik">Marka :</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>@Model.Car.Brand</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="aracBaslik">Yakıt Tipi :</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>@Model.Car.FuelType</div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="aracBaslik">Vites Tipi :</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div> @Model.Car.TypeOfGear</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="aracBaslik">Alış Yeri :</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>@Model.Branch.Adress</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="aracBaslik">Günlük Ücret :</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>@Model.Car.DailyPrice</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4 aracBilgiler">
+                <div class="row">
+                    <div class="col-md-12 formBilgiler">
+
+                        <form method="post" asp-controller="Customer" asp-action="RentIt" class="was-validated">
+
+                            <div class="col-md-12 surucuBilgi">
+                                <h2><b>TARİH BİLGİLERİ</b></h2>
+                            </div>
+
+                            <div class="CarBaslik">Alış Tarihi</div>
+                            <div class="CarTH">
+                                <input id="alisTH" type="date" name="rentDate" />
+                                <script>
+                                    document.getElementById('alisTH').valueAsDate = new Date();
+                                </script>
+                            </div>
+
+                            <div class="CarBaslik">Dönüş Tarihi</div>
+                            <div class="CarTH">
+                                <input id="donusTH" type="date" name="deliverDate" />
+                                <script>
+                                    document.getElementById('donusTH').valueAsDate = new Date();
+                                </script>
+                            </div>
+
+
+                            <br>
+                            <input type="hidden" id="BookingID" name="carId" value='@Model.Car.Id' />
+                            <button type="submit" class="btn btn-success w-100">Rezervasyonu Tamamla</button>
+
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <br><br><br><br>
+
+        
+
+    </div>
+</body>
+</html>
